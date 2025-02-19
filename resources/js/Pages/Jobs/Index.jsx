@@ -117,9 +117,6 @@ const Index = () => {
                         >
                           View
                         </Link>
-                        <Link href={route('jobs.edit', job.id)} className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
-                          Edit
-                        </Link>
                         <button onClick={() => handleDelete(job.id)} className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
                           Delete
                         </button>
