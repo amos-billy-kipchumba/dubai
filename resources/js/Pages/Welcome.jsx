@@ -18,6 +18,7 @@ import "../../jss/move-top";
 import "../../jss/simpleLightbox";
 import HomeLayout from "@/Layouts/HomeLayout";
 import '../../css/index.scss'
+import '../../css/app.css'
 
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
@@ -71,7 +72,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
 
               {/*Jobs*/}
-              <div className="lg:py-24 md:py-16 py-10 bg-slate-50 xl:px-0 px-10">
+              <div className="lg:py-24 md:py-16 sm:py-12 py-10 bg-slate-50 xl:px-0 px-6 sm:px-4">
                 <div className="max-w-3xl mx-auto">
                   <input
                     type="text"
@@ -89,38 +90,39 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </div>
                   )}
                 </div>
-                <h2 className="text-gray-900 text-center font-manrope lg:text-4xl text-3xl font-bold leading-10 mb-14 py-4">
+
+                <h2 className="text-gray-900 text-center font-manrope lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold leading-10 mb-10 py-4">
                   Open positions
                 </h2>
-                <div className="lg:max-w-3xl md:max-w-xl sm:max-w-md max-w-sm mx-auto border border-slate-200 bg-white rounded-2xl p-12">
-                  {jobs?.data?.length > 0 ? (
-                  jobs?.data?.map((job) => (
-                  <div className="flex justify-between gap-x-8 pb-6 border-b border-gray-200" key={job.id}>
-                    <div>
-                     <img src={job.image_url} alt="Job Image" className="h-28 rounded-lg shadow-md" />
-                    </div>
-                    <div className="flex flex-col">
-                      <h3 className="text-gray-900 text-xl font-medium leading-8">
-                        {job.title} - {job.job_type}
-                      </h3>
-                      <p>{job.location}</p>
-                      <p>${job.salary_min} - ${job.salary_max}</p>
-                    </div>
-                    
-                    <Link
-                      href={route('jobShow', job.id)}
-                      className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white transition duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    >
-                      View Job
-                    </Link>
 
-                  </div> ))
+                <div className="lg:max-w-3xl md:max-w-xl sm:max-w-md max-w-sm mx-auto border border-slate-200 bg-white rounded-2xl p-8 sm:p-6">
+                  {jobs?.data?.length > 0 ? (
+                    jobs?.data?.map((job) => (
+                      <div className="flex sm:flex-row flex-col gap-x-6 pb-6 border-b border-gray-200" key={job.id}>
+                        <img src={job.image_url} alt="Job Image" className="h-28 w-full sm:w-auto rounded-lg shadow-md" />
+                        
+                        <div className="flex flex-col flex-1">
+                          <h3 className="text-gray-900 text-lg sm:text-xl font-medium leading-8">
+                            {job.title} - {job.job_type}
+                          </h3>
+                          <p className="text-sm sm:text-base">{job.location}</p>
+                          <p className="text-sm sm:text-base">${job.salary_min} - ${job.salary_max}</p>
+                        </div>
+
+                        <Link
+                          href={route('jobShow', job.id)}
+                          className="inline-flex items-center px-3 py-2 text-sm sm:text-base rounded-lg bg-blue-600 text-white transition duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        >
+                          View Job
+                        </Link>
+                      </div>
+                    ))
                   ) : (
-                  <div className="flex justify-between gap-x-8 pb-6 border-b border-gray-200">
-                    <h3 className="text-gray-900 text-xl font-medium leading-8">
-                      No job yet
-                    </h3>
-                  </div> 
+                    <div className="flex justify-between pb-6 border-b border-gray-200">
+                      <h3 className="text-gray-900 text-xl font-medium leading-8">
+                        No job yet
+                      </h3>
+                    </div>
                   )}
                 </div>
 
@@ -130,7 +132,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                       {pagination.prev_page_url && (
                         <Link
                           href={pagination.prev_page_url}
-                          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
+                          className="px-4 py-2 text-sm sm:text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
                         >
                           Previous
                         </Link>
@@ -138,7 +140,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                       {pagination.next_page_url && (
                         <Link
                           href={pagination.next_page_url}
-                          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
+                          className="px-4 py-2 text-sm sm:text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
                         >
                           Next
                         </Link>
@@ -147,6 +149,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                   </div>
                 )}
               </div>
+
 
               <div className="about" id="about">
                 <div className="banner_bottom_agile_grids">
