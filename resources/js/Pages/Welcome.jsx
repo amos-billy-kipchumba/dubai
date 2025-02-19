@@ -17,9 +17,10 @@ import "../../jss/jquery.flexslider";
 import "../../jss/move-top";
 import "../../jss/simpleLightbox";
 import HomeLayout from "@/Layouts/HomeLayout";
+import '../../css/index.scss'
+
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
-  const { layoutConfig } = useContext(LayoutContext);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
