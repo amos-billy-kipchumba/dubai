@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from '@inertiajs/react';
 import "../../css/index.scss";
 
 function Header() {
-
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const toggleMenu = () => {
-      setIsMenuOpen(!isMenuOpen);
-    };
 
   return (
     <div className='home-layout-wrapper'>
@@ -53,18 +47,9 @@ function Header() {
         {/* //Navbar */}
         <div className="banner-top-w3-agile">
             <ul>
-            <li className='flex flex-col space-y-1 text-4xl'>
-                <a href="https://wa.me/17787177439" className='flex items-center' target="_blank" rel="noopener noreferrer">
-                    <span className='mr-2'>1 </span><i className="fa fa-whatsapp text-green-400" aria-hidden="true"></i>
-                </a>
-                <a href="https://wa.me/254208022022" className='flex items-center' target="_blank" rel="noopener noreferrer">
-                    <span className='mr-2'>2 </span> <i className="fa fa-whatsapp text-green-400" aria-hidden="true"></i>
-                </a>
-            </li>
-
             <li>
-                <p>Poland</p>
-                <span>Factory Works</span>
+                <p>Dubai</p>
+                <span>Work</span>
             </li>
             <li>
                 <p>USA</p>
@@ -114,13 +99,6 @@ function Header() {
                             <i className="fa fa-angle-right" aria-hidden="true" />
                             Contact Us
                         </a>
-
-                        <Link
-                            href={route('register')}
-                            className="scroll ml-2 bg-yellow-600 text-white px-4 py-2"
-                        >
-                            Register
-                        </Link>
 
                         <Link
                             href={route('login')}

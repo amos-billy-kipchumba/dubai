@@ -9,32 +9,28 @@ use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class JobController extends Controller
 {
 
     public function index(Request $request)
     {
-        $user = Auth::user();
-    
-        $query = Job::with('user');
-    
-        if ($user->role_id == 2) {
-            $query->whereHas('user', function ($q) use ($user) {
-                $q->where('company_id', '=', $user->company_id);
-            });
-        } elseif ($user->role_id == 3) {
-            $query->where('user_id', '=', $user->id);
-        }
+        $query = Job::query();
     
         if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->whereHas('user', function ($q) use ($search) {
-                $q->where('name', 'LIKE', "%$search%")
-                  ->orWhere('email', 'LIKE', "%$search%");
+            $search = trim($request->input('search'));
+    
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%$search%")
+                  ->orWhere('company_name', 'LIKE', "%$search%")
+                  ->orWhere('location', 'LIKE', "%$search%")
+                  ->orWhere('job_type', 'LIKE', "%$search%")
+                  ->orWhere('salary_min', 'LIKE', "%$search%")
+                  ->orWhere('salary_max', 'LIKE', "%$search%");
             });
         }
-
+    
         $query->orderBy('created_at', 'desc');
     
         $jobs = $query->paginate(10);
@@ -44,26 +40,31 @@ class JobController extends Controller
             'pagination' => $jobs,
             'flash' => session('flash'),
         ]);
-    }
+    }    
     
 
     public function create()
     {
         $jobs = Job::all();
-        $users = User::all();
 
         return Inertia::render('Jobs/Create', [
-            'jobs' => $jobs,
-            'users'=> $users
+            'jobs' => $jobs
         ]);
     }
 
     public function store(StoreJobRequest $request)
     {
-        Job::create($request->validated());
-
+        $validated = $request->validated();
+    
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('images', 'public');
+        }
+    
+        Job::create($validated);
+    
         return redirect()->route('jobs.index')->with('success', 'Job created successfully.');
     }
+    
 
 
     public function show(Job $job)
@@ -76,12 +77,10 @@ class JobController extends Controller
     public function edit(Job $job)
     {
         $jobs = Job::all();
-        $users = User::all();
 
         return Inertia::render('Jobs/Edit', [
             'job' => $job,
-            'jobs' => $jobs,
-            'users'=>$users
+            'jobs' => $jobs
         ]);
     }
 

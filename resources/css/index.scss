@@ -311,7 +311,7 @@ label{
 	border: 0;*/
 }
 .slide-1{
-	background: url(../../public/images/slide-1.jpg) no-repeat 0px 0px;
+	background: url(../../public/image/bg1.jpg) no-repeat 0px 0px;
 }
 .slide-2{
 	background: url(../../public/images/slide-2.jpg) no-repeat 0px 0px;
@@ -1339,6 +1339,7 @@ li.flex-active-slide p:after {
     position: absolute;
     left: 26em;
     bottom: -10em;
+	transform: translateY(60px);
 }
 .contact-left {
     float: left;
@@ -2431,6 +2432,8 @@ border:2px solid #f85993;
 		left: 25%;
 	}
 }
+
+
 @media(max-width:640px){
 	.sevices-w3layouts-grids.sevices-w3layouts-mdl1 {
 		margin-right: 11px;

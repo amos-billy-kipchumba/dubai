@@ -9,7 +9,7 @@ import { usePage } from '@inertiajs/react';
 
 const Dashboard = ({ auth }) => {
     // Get data from the page props
-    const { userCount } = usePage().props;
+    const { jobCount, applicationCount } = usePage().props;
     
     const [lineOptions, setLineOptions] = useState({});
     const { layoutConfig } = useContext(LayoutContext);
@@ -92,11 +92,21 @@ const Dashboard = ({ auth }) => {
             <div className="grid">
                 {roleId === 1 && 
                 <DashboardInfoCard
-                    title="Users"
-                    value={userCount}
+                    title="Jobs"
+                    value={jobCount}
                     icon="map-marker"
                     iconColor="blue"
-                    descriptionValue="Total users who have applied"
+                    descriptionValue="Total jobs"
+                    descriptionText="in the system"
+                />}
+
+                {roleId === 1 && 
+                <DashboardInfoCard
+                    title="Applications"
+                    value={applicationCount}
+                    icon="map-marker"
+                    iconColor="blue"
+                    descriptionValue="Total applications"
                     descriptionText="in the system"
                 />}
             </div>

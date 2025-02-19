@@ -8,7 +8,7 @@ import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 
 const Index = () => {
-  const { notifications, flash, pagination, auth } = usePage().props; // Assuming pagination data is passed
+  const { applications, flash, pagination, auth } = usePage().props; // Assuming pagination data is passed
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -19,7 +19,7 @@ const Index = () => {
     } = useForm();
 
   // Function to handle delete confirmation
-  const handleDelete = (notificationId) => {
+  const handleDelete = (applicationId) => {
     Swal.fire({
       title: 'Are you sure?',
       text: 'This action cannot be undone.',
@@ -31,7 +31,7 @@ const Index = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Use Inertia.delete for making the delete request
-        destroy(route('notifications.destroy', notificationId), {
+        destroy(route('applications.destroy', applicationId), {
           onSuccess: () => {
             // Optionally you can handle success actions here
           },
@@ -48,7 +48,7 @@ const Index = () => {
     setSearchTerm(e.target.value);
     setLoading(true);
 
-    router.get(route('notifications.index'), { search: e.target.value }, {
+    router.get(route('applications.index'), { search: e.target.value }, {
       preserveState: true,
       onFinish: () => setLoading(false),
     });
@@ -59,11 +59,11 @@ const Index = () => {
     const logoUrl = '/images/logo/logo.png';
     doc.addImage(logoUrl, 'PNG', 10, 10, 80, 30);
     doc.setFontSize(14);
-    doc.text(`Notifications Report`, 14, 50);
+    doc.text(`applications Report`, 14, 50);
     
     const columns = ["User", "Message", "Is read"];
     
-    const rows = notifications.map(data => [
+    const rows = applications.map(data => [
       data.user?.name, 
       data.message, 
       data.is_read
@@ -75,19 +75,19 @@ const Index = () => {
       startY: 60,
     });
     
-    doc.save("notifications_reports.pdf");
+    doc.save("applications_reports.pdf");
   };
 
   const generateExcel = () => {
-    const ws = XLSX.utils.json_to_sheet(notifications.map((data) => ({
+    const ws = XLSX.utils.json_to_sheet(applications.map((data) => ({
       Name: data.user?.name,
       Message: data.message,
       IsRead: data.is_read
     })));
   
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Notifications');
-    XLSX.writeFile(wb, 'notifications_report.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, 'applications');
+    XLSX.writeFile(wb, 'applications_report.xlsx');
   };
 
   return (
@@ -118,23 +118,13 @@ const Index = () => {
           `}>
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <h1 className="text-2xl font-semibold text-gray-900 w-full sm:w-auto my-auto">
-                Notifications Directory
+                Applications Directory
               </h1>
               
               <div className="flex flex-wrap justify-center gap-2 w-full sm:w-auto">
-                {roleId !== 3 &&
-                <Link
-                  href={route('notifications.create')}
-                  className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
-                >
-                  <Plus className="w-4 h-4 mr-2 my-auto" />
-                  <span className='my-auto'>
-                  Create
-                  </span>
-                </Link>}
                 <button
                   onClick={generatePDF}
-                  disabled={notifications.length === 0}
+                  disabled={applications.length === 0}
                   className="flex cursor-pointer items-center justify-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm disabled:opacity-50"
                 >
                   <FileText className="w-4 h-4 mr-2 my-auto" />
@@ -144,7 +134,7 @@ const Index = () => {
                 </button>
                 <button
                   onClick={generateExcel}
-                  disabled={notifications.length === 0}
+                  disabled={applications.length === 0}
                   className="inline-flex cursor-pointer items-center justify-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm disabled:opacity-50"
                 >
                   <FileSpreadsheet className="w-4 h-4 mr-2 my-auto" />
@@ -162,7 +152,7 @@ const Index = () => {
               value={searchTerm}
               onChange={handleSearchChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Search notifications..."
+              placeholder="Search applications..."
             />
             {loading && <p className="text-sm text-gray-500 mt-2">Searching...</p>}
           </div>
@@ -176,36 +166,40 @@ const Index = () => {
           </div>
         )}
 
-        {/* notifications Table */}
+        {/* applications Table */}
         <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
           <table className="min-w-full table-auto">
             <thead className="bg-gray-100">
               <tr>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">User</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Message</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Is read</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Email</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Phone</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Job</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Location</th>
                 <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {notifications.length > 0 ? (
-                notifications.map((notification) => (
-                  <tr key={notification.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap">{notification.user?.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{notification.message}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{notification.is_read}</td>
+              {applications.length > 0 ? (
+                applications.map((application) => (
+                  <tr key={application.id}>
+                    <td className="px-6 py-4 whitespace-nowrap">{application.user?.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{application.user?.email}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{application.user?.phone}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{application.job?.title}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{application.job?.location}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right">
                       <div className="flex justify-end gap-3">
                         <Link
-                          href={route('notifications.edit', notification.id)}
-                          className="inline-flex items-center px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-200"
+                          href={route('jobs.show', application.job?.id)}
+                          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
                         >
-                          Edit
+                          View job
                         </Link>
                         <form
                           onSubmit={(e) => {
                             e.preventDefault();
-                            handleDelete(notification.id); // Call SweetAlert2 on delete
+                            handleDelete(application.id); // Call SweetAlert2 on delete
                           }}
                           className="inline"
                         >
@@ -219,7 +213,7 @@ const Index = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" className="text-center py-4">No notifications found.</td>
+                  <td colSpan="6" className="text-center py-4">No applications found.</td>
                 </tr>
               )}
             </tbody>

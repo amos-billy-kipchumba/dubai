@@ -21,16 +21,9 @@
     <p>Name: {{ $user->name }}</p>
     <p>Email: {{ $user->email }}</p>
     <p>Phone: {{ $user->phone }}</p>
-    <p>Date of Birth: {{ $user->date_of_birth }}</p>
-    <p>Nationality: {{ $user->nationality }}</p>
-    <p>Current Location: {{ $user->current_location }}</p>
-    <p>Position: {{ $user->position }}</p>
-    <p>Education: {{ $user->education }}</p>
-    <p>Languages: {{ $user->languages }}</p>
-    <p>References: {{ $user->references }}</p>
     
     <p>CV and Certificate of good conduct are attached.</p>
 
-    <p><strong>The LinkPath Team</strong></p>
+    <p><strong>The Emirates Edge Agency Team</strong></p>
 </body>
 </html>

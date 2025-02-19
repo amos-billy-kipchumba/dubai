@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Loan;
+use App\Models\Job;
+use App\Models\Application;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\Employee;
@@ -22,6 +24,10 @@ class DashboardController extends Controller
         $currentYear = Carbon::now()->year;
 
         $companies = Company::all();
+
+        $jobCount = Job::count();
+
+        $applicationCount = Application::count();
 
         $user = Auth::user();
 
@@ -170,6 +176,8 @@ class DashboardController extends Controller
             
             return Inertia::render('Dashboard', [
                 'userCount' => $userCount,
+                'applicationCount'=> $applicationCount,
+                'jobCount'=> $jobCount,
                 'employee'=>$employee
             ]);
             

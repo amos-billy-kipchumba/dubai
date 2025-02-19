@@ -33,4 +33,11 @@ class Job extends Model
         'job_reference',
         'image'
     ];
+
+    protected $appends = ['image_url'];
+    
+    public function getImageUrlAttribute()
+    {
+        return $this->image ? asset('storage/' . $this->image) : null;
+    }
 }

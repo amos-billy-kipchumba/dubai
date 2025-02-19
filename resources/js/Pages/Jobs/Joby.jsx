@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
-import Layout from "@/Layouts/layout/layout.jsx";
+import Lay from '@/Layouts/layout/Lay';
 
-const Show = ({ job }) => {
+const Joby = ({ job }) => {
   const formatSalary = (min, max) => {
     if (!min && !max) return 'Not specified';
     if (!max) return `From $${min.toLocaleString()}`;
@@ -20,8 +20,8 @@ const Show = ({ job }) => {
   };
 
   return (
-    <Layout>
-      <div className="max-w-6xl">
+    <Lay bg={job.image_url} job={job}>
+      <div className="max-w-6xl mx-auto py-4">
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
           {/* Header Section */}
           <div className="bg-gray-50 border-b p-6">
@@ -33,17 +33,16 @@ const Show = ({ job }) => {
               <span>•</span>
               <span>{job.job_type}</span>
             </div>
+            <Link
+                href={route('home')}
+                className="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition mt-4"
+            >
+                Go back
+            </Link>
           </div>
 
           {/* Main Content */}
           <div className="p-6 space-y-8">
-            {/* Key Details Section */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="flex justify-between w-1/2">
-                <img src={job.image_url} alt="Job Image" className="w-full h-auto rounded-lg shadow-md" />
-              </div>
-            </div>
-
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4 lg:w-1/2">
                 <h2 className="text-xl font-semibold text-gray-900">Key Details</h2>
@@ -159,24 +158,18 @@ const Show = ({ job }) => {
           {/* Footer Actions */}
           <div className="border-t bg-gray-50 p-6">
             <div className="flex justify-between items-center">
-              <Link
-                href={route('jobs.index')}
-                className="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition"
-              >
-                Back to Jobs
-              </Link>
-              <Link
-                href={route('jobs.edit', job.id)}
+            <Link
+                href={route('register') + `?job_id=${job.id}`}
                 className="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition"
-              >
-                Edit Job
-              </Link>
+            >
+                Apply for the job
+            </Link>
             </div>
           </div>
         </div>
       </div>
-    </Layout>
+    </Lay>
   );
 };
 
-export default Show;
+export default Joby;

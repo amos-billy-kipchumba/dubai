@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Head, Link, usePage } from '@inertiajs/react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Guest from '@/Layouts/GuestLayout';
 
 export default function Register() {
+    const getQueryParam = (param) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    };
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '', email: '', phone: '', password: '', password_confirmation: '',
         dateOfBirth: '', nationality: '', current_location: '', preferred_countries: '',
         position: '', education: '', languages: '', passport_number: '',
-        cv: null, cover_letter: null, references: '', role_id: 3
+        cv: null, cover_letter: null, references: '', role_id: 3,
+        job_id: getQueryParam('job_id') || ''
     });
+    
 
     const { notification } = usePage().props;
 
     const [step, setStep] = useState(1);
-    const totalSteps = 5;
+    const totalSteps = 4;
 
     const nextStep = () => setStep((prev) => Math.min(prev + 1, totalSteps));
     const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
@@ -45,6 +52,10 @@ export default function Register() {
             }
         });
     };
+
+    useEffect(() => {
+        setData('job_id', getQueryParam('job_id') || '');
+    }, []);
 
     return (
         <Guest>
@@ -133,19 +144,7 @@ export default function Register() {
 
                         {step === 2 && (
                             <div>
-                                <h3 className="text-xl font-semibold mb-4">Work & Education</h3>
-                                <div className="mb-3">
-                                    <label htmlFor="position" className="block mb-1">Work position</label>
-                                    <input 
-                                        type="text" 
-                                        name="position" 
-                                        id="position" 
-                                        value={data.position} 
-                                        onChange={(e) => setData('position', e.target.value)} 
-                                        placeholder="Position" 
-                                        className="w-full p-2 border rounded" 
-                                    />
-                                </div>
+                                <h3 className="text-xl font-semibold mb-4">Education</h3>
 
                                 <div className="mb-3">
                                     <label htmlFor="education" className="block mb-1">Highest education level</label>
@@ -249,7 +248,7 @@ export default function Register() {
                                     Next
                                 </button>
                             )}
-                            {step === 5 && (
+                            {step === 4 && (
                                 <button 
                                     type="submit" 
                                     disabled={processing} 

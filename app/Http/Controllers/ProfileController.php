@@ -53,7 +53,7 @@ class ProfileController extends Controller
 
         // Create virtualUser for contact email
         $virtualUser = new User;
-        $virtualUser->email = 'info@linkpathtravel.agency';
+        $virtualUser->email = 'info@Emirates Edge Agencytravel.agency';
 
         // Send ContactMail
         Mail::to($virtualUser)->send(new ContactMail($validated));

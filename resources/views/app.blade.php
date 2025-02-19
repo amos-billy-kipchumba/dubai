@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title inertia>{{ config('app.name', 'LinkPath') }}</title>
+        <title inertia>{{ config('app.name', 'Emirates Edge Agency') }}</title>
 
         <!-- Meta Description -->
-        <meta name="description" content="LinkPath Travel Agency connects individuals to exciting job opportunities abroad, helping them explore global career paths and enhance their professional journeys.">
+        <meta name="description" content="Emirates Edge Agency Travel Agency connects individuals to exciting job opportunities abroad, helping them explore global career paths and enhance their professional journeys.">
 
         <!-- Favicon Links -->
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">

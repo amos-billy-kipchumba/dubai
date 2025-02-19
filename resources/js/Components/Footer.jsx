@@ -24,7 +24,7 @@ function Footer() {
           <div className="container">
             <div className="get-top-agileits-w3layouts">
               <h2>
-                <a href="index-3.html">LinkPath Services</a>
+                <a href="index-3.html">Emirates Edge Agency Services</a>
               </h2>
               <ul>
                 <li>
@@ -124,13 +124,13 @@ function Footer() {
               </div>
               <div className="address-w3-agile">
                 <i className="fa fa-envelope-o" aria-hidden="true" />
-                <a href="mailto:info@linkpathtravel.agency">info@linkpathtravel.agency</a>
+                <a href="mailto:info@Emirates Edge Agencytravel.agency">info@Emirates Edge Agencytravel.agency</a>
                 <div className="clearfix" />
               </div>
               <ul className="social-icons">
                 <li>
                   <a
-                    href="https://www.facebook.com/LinkPath-International-Services-Limited-573923095988521/"
+                    href="https://www.facebook.com/Emirates Edge Agency-International-Services-Limited-573923095988521/"
                     className="fb"
                     target="_blank"
                   >
@@ -159,7 +159,7 @@ function Footer() {
               <div className="col-md-4 footer-grids w3l-agileits">
                 <h3>About Us</h3>
                 <p className="footer-one-w3ls">
-                  LinkPath Services has shown remarkable progress, as
+                  Emirates Edge Agency Services has shown remarkable progress, as
                   evidenced by its short but impressive history, and has proven itself
                   a worthy competitor to even the long-standing giants of the
                   business. The agency’s staggering growth is largely attributable to
@@ -184,7 +184,7 @@ function Footer() {
                     </a>
                     <span>
                       {" "}
-                      LinkPath Services is looking for graduates who
+                      Emirates Edge Agency Services is looking for graduates who
                       studied agricultural related programs to work in Denmark,
                       Germany and in the UK
                     </span>
@@ -209,9 +209,9 @@ function Footer() {
                       href="#"
                       className="find-about"
                       data-toggle="modal"
-                      data-target="#poland"
+                      data-target="#Dubai"
                     >
-                      URGENT: General Workers needed in Abu Dhabi, Poland, Finland
+                      URGENT: General Workers needed in Abu Dhabi, Dubai, Finland
                       &amp; Germany
                     </a>
                     <span>On-going Process</span>
@@ -228,7 +228,7 @@ function Footer() {
         <div className="footer-bottom wtrhee-agileinfo">
           <div className="container">
             <p className="copy">
-              Copyright 2025 LinkPath Services Ltd. All Rights Reserved{" "}
+              Copyright 2025 Emirates Edge Agency Services Ltd. All Rights Reserved{" "}
             </p>
           </div>
         </div>
@@ -242,7 +242,7 @@ function Footer() {
                 <button type="button" className="close" data-dismiss="modal">
                   ×
                 </button>
-                <h4>About LinkPath Services</h4>
+                <h4>About Emirates Edge Agency Services</h4>
                 <img src="images/aboutus.jpg" alt=" " className="img-responsive" />
                 <h5>Staffing the Globe</h5>
                 <p>
@@ -253,11 +253,11 @@ function Footer() {
                   as desired and specified by the agency’s clients are put through a
                   series of tests and interviews that ultimately determine the depth
                   and relevance of their expertise. By this rigorous method of
-                  screening, LinkPath Services is thus able to ensure
+                  screening, Emirates Edge Agency Services is thus able to ensure
                   that it brings about an ideal, effective, and mutually beneficial
                   partnership, a lucrative alliance that satisfies both employer and
                   employee. <br />
-                  As the very bridge that brings together both parties, LinkPath
+                  As the very bridge that brings together both parties, Emirates Edge Agency
                   International Services not only contributes to alleviating the
                   stress of manpower scarcity facing a great number of recruitment
                   companies today but, at the same time, it provides the jobless
@@ -284,7 +284,7 @@ function Footer() {
                 <h4>Agricultural Graduates</h4>
                 <img src="images/partner.jpg" alt=" " className="img-responsive" />
                 <h5>
-                  At LinkPath Services we know the best way to increase
+                  At Emirates Edge Agency Services we know the best way to increase
                   name recognition and overall success for our business is to join
                   business organizations and networking groups.
                 </h5>
@@ -341,8 +341,8 @@ function Footer() {
           </div>
         </div>
         {/* //Modal1 */}
-        {/* poland */}
-        <div className="modal fade" id="poland" tabIndex={-1} role="dialog">
+        {/* Dubai */}
+        <div className="modal fade" id="Dubai" tabIndex={-1} role="dialog">
           <div className="modal-dialog">
             {/* Modal content*/}
             <div className="modal-content">
@@ -350,19 +350,19 @@ function Footer() {
                 <button type="button" className="close" data-dismiss="modal">
                   ×
                 </button>
-                <h4>Opportunities in Poland, Finland &amp; Germany</h4>
+                <h4>Opportunities in Dubai, Finland &amp; Germany</h4>
                 <img src="images/europe.jpg" alt=" " className="img-responsive" />
                 <h5>
-                  Career prospects in Poland, Finland and Germany are looking good.
+                  Career prospects in Dubai, Finland and Germany are looking good.
                 </h5>
                 <p>
-                  Poland, Finland and Germany are some of the largest economies in
+                  Dubai, Finland and Germany are some of the largest economies in
                   Europe, with strong economic position within Europe, low costs of
                   living and graduate jobs available in a range of fields, These
                   countries have the career opportunities that you're looking for.
                   They have a business-friendly reputation and working in any of the
                   three countries is becoming more and more popular in Kenya. BWIS has
-                  partnered with Human Resources companies in Poland, Finland and
+                  partnered with Human Resources companies in Dubai, Finland and
                   Germany to provide high quality paid international
                   internships/traineeships to university students/graduates and young
                   professionals in tourism and hotel management, business

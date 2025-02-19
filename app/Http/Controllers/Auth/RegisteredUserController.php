@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Job;
+use App\Models\Application;
 use App\Models\Notification;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -67,6 +69,7 @@ class RegisteredUserController extends Controller
                 'cv'                 => 'nullable|file|mimes:pdf,doc,docx|max:2048',
                 'cover_letter'       => 'nullable|file|mimes:pdf,doc,docx|max:2048',
                 'references'         => 'nullable|string',
+                'job_id'             => 'nullable|string',
             ]);
 
             // Store uploaded files if provided.
@@ -76,6 +79,8 @@ class RegisteredUserController extends Controller
             $coverLetterPath = $request->file('cover_letter')
                 ? $request->file('cover_letter')->store('cover_letters', 'public')
                 : null;
+
+            $job = Job::find($validated['job_id']);
 
             // Create the user.
             $user = User::create([
@@ -88,7 +93,6 @@ class RegisteredUserController extends Controller
                 'nationality'        => $validated['nationality'] ?? null,
                 'current_location'   => $validated['current_location'] ?? null,
                 'preferred_countries'=> $validated['preferred_countries'] ?? null,
-                'position'           => $validated['position'] ?? null,
                 'education'          => $validated['education'] ?? null,
                 'languages'          => $validated['languages'] ?? null,
                 'passport_number'    => $validated['passport_number'] ?? null,
@@ -97,12 +101,17 @@ class RegisteredUserController extends Controller
                 'references'         => $validated['references'] ?? null,
             ]);
 
+            Application::create([
+                'job_id' => $validated['job_id'],
+                'user_id' => $user->id
+            ]);
+
             // Fire the Registered event and log the user in.
             event(new Registered($user));
             Auth::login($user);
 
             // Notify admin by email.
-            Mail::to('info@linkpathtravel.agency')
+            Mail::to('info@emiratesedgecareers.agency')
                 ->send(new AdminUserRegistrationMail(
                     $user,
                     $cvPath ? storage_path('app/public/' . $cvPath) : null,

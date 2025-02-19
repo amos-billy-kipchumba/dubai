@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +28,6 @@ use App\Http\Controllers\ApplicationController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
 
 Route::post('/send-comment', [ProfileController::class, 'sendComment'])->name('profile.sendComment');
 
@@ -42,14 +35,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/joby/{job}', [HomeController::class, 'showJob'])->name('jobShow');
 
 
 Route::middleware('auth')->group(function () {
@@ -70,7 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('repayments', RepaymentController::class);
     Route::resource('users', UserController::class);
     Route::resource('jobs', JobController::class);
-    Route::resource('application', ApplicationController::class);
+    Route::resource('applications', ApplicationController::class);
 });
 
 Route::resource('employees', EmployeeController::class);

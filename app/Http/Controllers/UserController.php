@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         // Start the query with eager loading
-        $query = User::with(['company']); // Eager-load company, whether it exists or not
+        $query = User::query(); // Eager-load company, whether it exists or not
     
         if ($request->has('search')) {
             $search = $request->input('search');

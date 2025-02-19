@@ -17,7 +17,7 @@ class ApplicationController extends Controller
     {
         $user = Auth::user();
     
-        $query = Application::with('user');
+        $query = Application::with('user', 'job');
     
         if ($user->role_id == 2) {
             $query->whereHas('user', function ($q) use ($user) {

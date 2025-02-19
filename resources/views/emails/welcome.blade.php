@@ -14,11 +14,11 @@
     </style>
 </head>
 <body>
-    <h2>Welcome to LinkPath, {{ $user->name }}!</h2>
+    <h2>Welcome to Emirates Edge Agency, {{ $user->name }}!</h2>
     <p>Thank you for registering with us. We're excited to have you on board.</p>
     <p>Your submission is being processed!</p>
     <p>We will send you an email once you are approved. Thank you!</p>
     <p>Best regards,</p>
-    <p><strong>The LinkPath Team</strong></p>
+    <p><strong>The Emirates Edge Agency Team</strong></p>
 </body>
 </html>
